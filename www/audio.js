@@ -1,9 +1,5 @@
 var locations = [
-	
-	
-
-{"type": "point", "lat": 42.342031, "lng": -71.093646, "label": "label", "audio": "some-audio.mp3","maxdistance": "0.010","volume": 0,  "fadeintime": 250, "fadeouttime": 500, "probability": 100},												
-
+	{"type": "point", "lat": 42.342031, "lng": -71.093646, "label": "label", "audio": "some-audio.mp3","maxdistance": "0.010","volume": 0,  "fadeintime": 250, "fadeouttime": 500, "probability": 100},
 
 	{
 		"type": "region_array",
@@ -19,8 +15,6 @@ var locations = [
 			"some_other_audio.mp3"
 		]
 	},
-	
-
 
 		{
 		"type": "region",
@@ -43,7 +37,5 @@ var locations = [
 "audio_array":
 ["someaudio.mp3",
 "someotheraudio.mp3"]}
-	
-
 
 ];
