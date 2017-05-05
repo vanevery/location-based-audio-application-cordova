@@ -2,16 +2,23 @@
 
 var DEBUGGING = false;
 
+  		var SINGLE_GEO_LOC_CONFIGURATION = 
+  		{
+  			timeout: 5,
+  			maximumAge: 5000,
+  			desiredAccuracy: 0,
+  			samples: 1
+  		};
+  		
 var GEO_LOC_CONFIGURATION =
 {
 
 	desiredAccuracy: 0,
-	distanceFilter: 0,
-	disableElasticity: true,
-	disableStopDetection: true,
+	distanceFilter: 0,  // <-- Do you really need a location ~every second??
+	disableElasticity: true, // Added
 	locationUpdateInterval: 500,
 	fastestLocationUpdateInterval: 250,
-	stationaryRadius: 20, 
+	stationaryRadius: 3,  // Plugin docs say min 25 
 	activityType: 'Fitness',
 	activityRecognitionInterval: 10000,
 	stopTimeout: 15,
@@ -132,16 +139,34 @@ function rmFadeOut(index) {
 
 }
 
-var fadeInterval = setInterval(function() {
-	for (var i = 0; i < fadeIns.length; i++) {
-		fadeIn(fadeIns[i]);
-	}
-	
-	for (var j = 0; j < fadeOuts.length; j++) {
-		fadeOut(fadeOuts[j]);
-	}
-	
-}, FADE_INTERVAL);
+// var fadeInterval = setInterval(function() {
+// 	for (var i = 0; i < fadeIns.length; i++) {
+// 		fadeIn(fadeIns[i]);
+// 	}
+// 	
+// 	for (var j = 0; j < fadeOuts.length; j++) {
+// 		fadeOut(fadeOuts[j]);
+// 	}
+// 	
+// }, FADE_INTERVAL);
+
+// Make it work correctly in the background
+var workerInterval = new Worker('timer.js');
+console.log(workerInterval);
+workerInterval.onmessage = function(event) {
+    if ( event.data === 'interval.start' ) {
+			for (var i = 0; i < fadeIns.length; i++) {
+				fadeIn(fadeIns[i]);
+			}
+
+			for (var j = 0; j < fadeOuts.length; j++) {
+				fadeOut(fadeOuts[j]);
+			}
+
+
+    }
+};
+workerInterval.postMessage({start:true, ms:FADE_INTERVAL});
 
 
 
@@ -1310,6 +1335,7 @@ function locationWatchPositionCallback(currentPosition, taskId)
 		
 		if (numOutOfBoundsReadings >= MAX_OUTOFBOUNDS_READINGS && !displayedOutOfRange) {
 			displayedOutOfRange = true;
+			BackgroundGeolocation.stopWatchPosition();			
 			outOfBounds();
 			window.BackgroundGeolocation.finish(taskId);
 			window.BackgroundGeolocation.stop();
@@ -1355,10 +1381,11 @@ function onDeviceReady() {
 	console.log(device.platform);
 
 	/////// Keep screen awake ///////
-	//window.plugins.insomnia.keepAwake();
+	window.plugins.insomnia.keepAwake();
 
-    // Startup the NativeAudio plugin
-    //window.plugins.NativeAudio.setOptions(function() {}, function() {}, {});
+    // Startup the NativeAudio plugin for Android
+    window.plugins.NativeAudio.setOptions(function() {}, function() {}, {});
+
 
 	prepareLocations();			
 	checkLoadLocations();
@@ -1378,7 +1405,7 @@ function onDeviceReady() {
 			window.BackgroundGeolocation.changePace(true);		
 			window.BackgroundGeolocation.getCurrentPosition(locationWatchPositionCallback);		
 
-		});	
+		});		
 
 	window.BackgroundGeolocation.on('heatbeat', 
 		function(params) {
@@ -1391,7 +1418,7 @@ function onDeviceReady() {
 		} 
 	);
 
-
+	// Only when motion sensor is in use
 	window.BackgroundGeolocation.on('motionchange', function(isMoving, location, taskId) {
 	    if (isMoving) {
     	    console.log('Device has just started MOVING', location);
