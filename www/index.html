@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>Fens</title>
+    <style>
+    	body {
+    		margin-top: 0px;
+   			margin-right: 0px;
+    		margin-bottom: 0px;
+	    	margin-left: 0px;
+	    	background-color: black;
+    	}
+    	
+		a:link {
+			text-decoration: none;
+			background: none;
+			background-color: transparent;
+		}
+
+		a:visited {
+			text-decoration: none;
+			background: none;
+			background-color: transparent;    
+		}
+
+		a:hover {
+			text-decoration: none;
+			background: none;
+			background-color: transparent;    
+		}
+
+		a:active {
+			text-decoration: none;
+			background: none;
+			background-color: transparent;
+		}
+		
+		.container {
+			width: 100%;
+			height: 100%;
+			background: #444;
+			margin: 0 auto;
+			text-align: center;
+		}
+		
+		.container img.wide {
+			max-width: 100%;
+			max-height: 100%;
+			height: auto;
+		}
+		
+		.container img.tall {
+			max-height: 100%;
+			max-width: 100%;
+			width: auto;
+		}​					
+    </style>
+  </head>
+  <body>
+	<div id='main' style="container"><img id="splash" class="container" src="splash1242x2208.png"></div>
+	<script type="text/javascript">
+		var ratio = 0.5625;
+	
+		window.addEventListener('load', function() {
+			document.getElementById("splash").style.height = window.innerHeight + "px";
+
+			var splash = document.getElementById('splash');
+			var splashClass = "tall";
+			if (splash.width/splash.height > ratio) {
+				splashClass = "wide";
+			}
+			console.log(splash.width/splash.height + " " + splashClass);
+			splash.classList.add(splashClass);
+		});	
+	
+		var maxDelta = 700; // ms
+		
+		var singleTap = false;
+		var singleTapTime = 0;
+				
+		function tap() {
+			if (singleTap) {
+				console.log(Date.now() - singleTapTime);
+				if (Date.now() - singleTapTime < maxDelta) {
+					// it's a double tap
+					location.href = "main.html";
+				}
+			}
+            
+            singleTap = true;
+            singleTapTime = Date.now();
+		}	
+		
+		document.getElementById('main').addEventListener('touchstart', function(e){
+			//tap();
+			location.href = "main.html";
+		}, false);
+		
+// 		document.getElementById('main').addEventListener('click', function(e){
+// 			tap();
+// 		}, false);
+
+	</script>
+  </body>
+</html>

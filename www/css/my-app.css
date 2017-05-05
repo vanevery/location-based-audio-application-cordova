@@ -1,0 +1,21 @@
+#map {
+	height: 100%;
+	width: 100%;
+	left: 0px;
+	top: 0px;
+	visibility: visible;
+	z-index: 10;
+}
+
+#testing {
+	display: none;	
+}
+
+.translucent {
+	opacity: 0.5;
+	mix-blend-mode: multiply;
+}
+
+#maptogglevisibilityonmap {
+	font-size: 30px;
+}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>Fens</title>
+    <!-- Path to Framework7 Library CSS-->
+    <link rel="stylesheet" href="css/framework7.ios.min.css">
+    <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
+    <!-- Path to your custom app styles-->
+    <link rel="stylesheet" href="css/my-app.css">
+    <style>
+    	#currentlyplaying {
+    		background-color: green;
+    	}
+    </style>
+  </head>
+  <body>
+    <!-- Status bar overlay for fullscreen mode-->
+    <div class="statusbar-overlay"></div>
+    <!-- Panels overlay-->
+    <div class="panel-overlay"></div>
+    <!-- Left panel with reveal effect-->
+    <div class="panel panel-left panel-reveal">
+      <div class="content-block">
+		<div class="list-block">
+			<ul>
+			  <li><span onclick="loadSplash();" class="item-link close-panel">
+				  <div class="item-content"> 
+					<div class="item-inner">
+					  <div class="item-title">Main</div>
+					</div>
+				  </div></span></li>
+			  <li><a href="#about" class="item-link close-panel">
+				  <div class="item-content">
+					<div class="item-inner"> 
+					  <div class="item-title">About</div>
+					</div>
+				  </div></a></li>
+				<li><span onclick="toggleMapVisibility();" class="item-link close-panel">
+				  <div class="item-content"> 
+					<div class="item-inner">
+					  <div class="item-title">Toggle Debug Mode</div>
+					</div>
+				  </div></span></li>
+			</ul>
+		  </div>        
+      </div>
+	      
+    </div>
+    <div class="views">
+      <div class="view view-main">
+        <div id="thenavbar" class="navbar no-border" style="background-color:rgba(0, 0, 0, 0.0);">
+          <div class="navbar-inner">
+            <div class="left">
+              <a href="#" class="link icon-only open-panel"> <i class="icon icon-bars"></i></a>
+            </div>
+          </div>
+          <div class="navbar-inner cached" data-page="about">
+            <div class="left">
+              <a href="#" class="back link"> <i class="icon icon-back"></i><span>Back</span></a>
+            </div>          
+            <div class="center sliding">About</div>
+          </div>
+        </div>
+        <div class="pages navbar-through">
+          <div class="page cached" data-page="about">
+            <div class="page-content">
+			  <div class="content-block">
+				<div class="content-block-inner">
+<h2>About</h2>
+ 
+				</div>
+			  </div>
+            </div>
+          </div>   
+
+        <div data-page="index" class="page">
+        	<!-- Comment out page-content to get rid of empty header -->
+<!-- 
+            <div class="page-content">
+ -->
+				<div id="map"></div>
+				<div id="testing">
+					<div id="startdiv">LOADING...<div id="loading">0 Locations</div></div>
+					<div>Current Location: <div id="currentLocation">Waiting for GPS</div></div>
+					<div>Walk around virtually: <button id="up" onclick="up();">Up</button> <button id="down" onclick="down();">Down</button> <button id="left" onclick="left();">Left</button> <button id="right" onclick="right();">Right</button>
+					<div><button id="center" onclick="recenter();">Recenter</button> (Only click if you are testing off-site)</div>
+					<button id="maptoggle" onclick="toggleMap();">Toggle Map</button>
+					<button id="maptogglevisibility" onclick="toggleMapVisibility();">Toggle Fullscreen</button>
+					<!-- <input id="mapopacity" type="range" value="5" min="0" max="10" step="1" oninput="mapOpacityChange(this.value);"/> -->
+					<!-- <span id="currentopacity">.5</span> -->
+					<div id="solo">No Solo</div>
+					<div id="numfiles">0</div>
+					<div id="currentlyplaying"><div>
+					<div id="displayinfo"></div>
+					<div id="locations"></div>
+					<div id="log" style="display: none;"></div>
+				</div>    
+<!-- 
+			</div>			
+ -->
+          </div>
+        </div>
+      </div>
+    </div>
+<script type="text/javascript" src="audio.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=ENTERYOURKEYHERE&callback=initMap" async defer></script>
+<script type="text/javascript">
+	function loadSplash() {
+		location.href="index.html";
+	}
+</script>
+    <script type="text/javascript" src="js/framework7.min.js"></script>
+    <script type="text/javascript" src="js/my-app.js"></script>
+	<script type="text/javascript" src="cordova.js"></script>    
+  </body>
+</html>

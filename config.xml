@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.example.project" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>APplication Name</name>
+    <description />
+    <author email="nobody@example.com" href="https://www.someurl.com/">
+    </author>
+      
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <platform name="android">
+        <allow-intent href="market:*" />
+
+        <icon src="www/icons/192x192.png" density="xxxhdpi" />
+        <icon src="www/icons/144x144.png" density="xxhdpi" />
+        <icon src="www/icons/96x96.png" density="xhdpi" />
+        <icon src="www/icons/72x72.png" density="hdpi" />
+        <icon src="www/icons/48x48.png" density="mdpi" />
+        <icon src="www/icons/36x36.png" density="ldpi" />        
+    </platform>
+    <platform name="ios">
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+
+        <icon src="www/icons/192x192.png" width="192" height="192" />
+        <icon src="www/icons/144x144.png" width="144" height="144" />
+        <icon src="www/icons/120x120.png" width="120" height="120" />
+        <icon src="www/icons/96x96.png" width="96" height="96" />
+        <icon src="www/icons/72x72.png" width="72" height="72" />
+        <icon src="www/icons/57x57.png" width="57" height="57" />
+        <icon src="www/icons/48x48.png" width="48" height="48" />
+		<icon src="www/icons/40x40.png" width="40" height="40" />
+        <icon src="www/icons/36x36.png" width="36" height="36" />        
+                
+    </platform>
+    <engine name="ios" spec="~4.3.1" />
+    <engine name="android" spec="~6.0.0" />
+	<preference name="cordova-background-geolocation-license" value="INSERT LICENSE KEY HERE" />
+    <plugin name="cordova-plugin-whitelist" spec="1" />
+    <plugin name="cordova-plugin-nativeaudio" spec="https://github.com/vanevery/cordova-plugin-nativeaudio" />
+    <plugin name="com.transistorsoft.cordova.background-geolocation" spec="~2.2.0" />
+    <plugin name="cordova-plugin-insomnia" spec="https://github.com/EddyVerbruggen/Insomnia-PhoneGap-Plugin.git" />
+    <plugin name="cordova-plugin-device" spec="~1.1.4" />
+    <plugin name="cordova-plugin-crosswalk-webview" spec="~2.2.0" />
+</widget>
