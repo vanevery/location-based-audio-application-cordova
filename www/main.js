@@ -174,6 +174,7 @@ workerInterval.postMessage({start:true, ms:FADE_INTERVAL});
 
 var map, marker, circle, customOverlay, translucentMap;
 
+/*
 	function TranslucentMapType(tileSize) {
 		this.tileSize = tileSize;
 	}
@@ -331,6 +332,7 @@ var map, marker, circle, customOverlay, translucentMap;
 		//console.log(div);
 		return div;					
 	};
+*/
 
 function initMap() {
 	console.log("initMap");
@@ -359,7 +361,8 @@ function initMap() {
 		  }]			
 	});						
 
-	map.overlayMapTypes.insertAt(0, new TranslucentMapType(new google.maps.Size(256, 256)));
+	// Custom Tiles (Commented out above)
+	//map.overlayMapTypes.insertAt(0, new TranslucentMapType(new google.maps.Size(256, 256)));
 
 	prepareLocations();
 
@@ -396,7 +399,10 @@ function initMap() {
 ////  Prepare Locations  ////////
 
 function prepareLocations() {
-	console.log("prepareLocations");
+	console.log("prepareLocations 1");
+	console.log(locations);
+	console.log("prepareLocations 2");
+	
 	if (map && deviceReady) {
 		for (var i = 0; i < locations.length; i++) {
 			//log(locations[i]);
@@ -1473,7 +1479,6 @@ function onDeviceReady() {
 
 function onWindowLoad() {
 	document.addEventListener('deviceready', onDeviceReady);
-	//onDeviceReady();
 }
 
 window.addEventListener('load', onWindowLoad);
@@ -1883,11 +1888,11 @@ function toggleMapVisibility() {
 		document.getElementById("map").style.height = "300px";
 		document.getElementById("map").style.position = "relative";
 
+		document.getElementById("testing").style.display = "block";
+
 		DEBUGGING = true;
 		
 		initMap();
-		
-		document.getElementById("testing").style.display = "block";
 
 		positionUpdated();
 	}
